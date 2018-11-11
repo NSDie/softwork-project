@@ -1,0 +1,88 @@
+# spring
+spring:
+  # 环境配置
+  profiles:
+      active: dev
+  # session
+  session:
+    timeout: 86400
+  # datasource
+  datasource:
+    # mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/timemachine?characterEncoding=utf-8
+    username: timeMachine
+    password: 123456
+    # druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    name: timeDataSource
+    druid:
+      # 连接池初始大小 最小 最大
+      initialSize: 1
+      minIdle: 1
+      maxActive: 20
+      # 连接等待超时
+      maxWait: 60000
+      # 检测空闲连接的时间间隔
+      timeBetweenEvictionRunsMillis: 60000
+      # 连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      # 检测连接为有效 sql
+      validationQuery: select 'x'
+      # 关闭监控
+      web-stat-filter:
+        enabled: false
+      stat-view-servlet:
+        enabled: false
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    # 超时(毫秒)
+    timeout: 10000
+    # 连接池配置
+    lettuce:
+      pool:
+        # 最大连接数
+        max-active: 8
+        # 最大阻塞等待时间,-1为无限制
+        max-wait: -1
+        # 最大空闲连接数
+        max-idle: 8
+        # 最小空闲连接数
+        min-idle: 0
+
+# mybatis
+mybatis:
+  type-aliases-package: com.west2.fzuTimeMachine.model
+  mapperLocations: classpath:mapper/*.xml
+
+# wechat
+wechat:
+  appID:
+  appSecret:
+
+# melody
+javamelody:
+  enabled: true
+  spring-monitoring-enabled: true
+  init-parameters:
+    # log http requests:
+    log: false
+    # to add basic auth:
+    authorized-users: admin:123456
+    # to change the default storage directory:
+    storage-directory: /tmp/javamelody
+
+# 七牛云
+qiniu:
+  accessKey: MSMDuemjws1ZXTbnnGE0T5eBEqHYSulj-Wdh5ZOr
+  secretKey: GzG9Kra7KPmqwQcpq_R9dI863xoJuzh3irPHy7Sg
+  bucket: fzutimemachine
+  tokenExpires: 180
+  backSecretKey: 2a640bf3701da3e7
+  # 服务器地址,请根据部署的服务器进行变更,推荐使用内网穿透进行测试
+  backUrl: http://time.huanglexing.com/time/uploadBack
+  cloudUrl: http://cloud.huanglexing.com/
