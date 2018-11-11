@@ -13,4 +13,5 @@ public class FootPrintApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FootPrintApplication.class, args);
 	}
+
 }

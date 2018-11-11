@@ -10,7 +10,7 @@ spring:
   datasource:
     # mysql
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/timemachine?characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/footprint?characterEncoding=utf-8
     username: timeMachine
     password: 123456
     # druid
@@ -56,7 +56,7 @@ spring:
 
 # mybatis
 mybatis:
-  type-aliases-package: com.west2.fzuTimeMachine.model
+  type-aliases-package: com.demo.FootPrint.model
   mapperLocations: classpath:mapper/*.xml
 
 # wechat
@@ -78,11 +78,11 @@ javamelody:
 
 # 七牛云
 qiniu:
-  accessKey: MSMDuemjws1ZXTbnnGE0T5eBEqHYSulj-Wdh5ZOr
-  secretKey: GzG9Kra7KPmqwQcpq_R9dI863xoJuzh3irPHy7Sg
-  bucket: fzutimemachine
+  accessKey: geM1tkff5cDM4vWD1g_jh5AVkImzeNCIE9an7mjR
+  secretKey: AuNc4qz-UAq-Xr2GVeyW17JcGcRhkElP2Z_ysRR1
+  bucket: footprint
   tokenExpires: 180
   backSecretKey: 2a640bf3701da3e7
   # 服务器地址,请根据部署的服务器进行变更,推荐使用内网穿透进行测试
   backUrl: http://time.huanglexing.com/time/uploadBack
-  cloudUrl: http://cloud.huanglexing.com/
+  cloudUrl: http://foot.yyf-blog.com/
