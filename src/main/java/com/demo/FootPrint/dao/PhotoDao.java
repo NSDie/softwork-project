@@ -17,6 +17,8 @@ public interface PhotoDao {
 
     void updateVisible(Photo photo);
 
+    Photo getById(int id);
+
     List<Photo> getAllByUserId(@Param("userId") Integer userId);
 
 }
