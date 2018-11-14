@@ -15,7 +15,7 @@ public interface PhotoDao {
 
     void save(Photo photo);
 
-    void updateVisible(Photo photo);
+    void updateVisible(@Param("timeId") Integer timeId, @Param("visible") Byte visible);
 
     Photo getById(int id);
 

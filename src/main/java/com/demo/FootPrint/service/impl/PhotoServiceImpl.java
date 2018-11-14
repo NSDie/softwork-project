@@ -8,6 +8,7 @@ import com.demo.FootPrint.exception.error.PhotoErrorEnum;
 import com.demo.FootPrint.model.dto.PhotoUploadBackDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadDTO;
 import com.demo.FootPrint.model.po.Photo;
+import com.demo.FootPrint.model.vo.PhotoMapVO;
 import com.demo.FootPrint.model.vo.PhotoUploadVO;
 import com.demo.FootPrint.service.PhotoService;
 import com.demo.FootPrint.util.AESUtil;
@@ -18,6 +19,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -64,7 +67,7 @@ public class PhotoServiceImpl implements PhotoService {
         photo.setPraiseNum(0);
         photo.setImgUrl(qiniuConfig.getCloudUrl() + key);
 
-        //TODO :: photoDao.save(photo)
+        photoDao.save(photo);
 
         // 返回上传凭证->>
         // AES加密timeId,后续用来校验回调消息的合法性
@@ -91,10 +94,21 @@ public class PhotoServiceImpl implements PhotoService {
         String rightKey = AESUtil.decrypt(photoUploadBackDTO.getEncryptedId(), qiniuConfig.getBackSecretKey());
         if (rightKey != null && photoUploadBackDTO.getId().equals(rightKey)) {
             // 上传成功
-            //photoDao.updateVisible(Integer.valueOf(photoUploadBackDTO.getId()), (byte) 1);
+            photoDao.updateVisible(Integer.valueOf(photoUploadBackDTO.getId()), (byte) 1);
         } else {
             throw new ApiException(PhotoErrorEnum.BACK_INVALID);
         }
+    }
+
+    @Override
+    public List<PhotoMapVO> getMap(Integer userId){
+        List<Photo> photoList = photoDao.getAllByUserId(userId);
+        List<PhotoMapVO> photoMapVOS = new ArrayList<>();
+        photoList.forEach((photo)->{
+            PhotoMapVO photoMapVO = modelMapper.map(photo,PhotoMapVO.class);
+            photoMapVOS.add(photoMapVO);
+        });
+        return photoMapVOS;
     }
 
 }

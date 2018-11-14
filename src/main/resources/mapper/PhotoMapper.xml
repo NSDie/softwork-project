@@ -34,7 +34,7 @@
            visible=#{visible}
         WHERE id=#{id}
     </update>
-    
+
     <resultMap type="Photo" id="resultListPhoto">
         <id column="id" property="id"/>
         <result column="userId" property="userId"/>

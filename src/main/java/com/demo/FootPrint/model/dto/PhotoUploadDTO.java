@@ -29,10 +29,6 @@ public class PhotoUploadDTO {
     @ApiModelProperty(name = "纬度", example = "26.08")
     private Double latitude;
 
-    @NotNull
-    @Size(max = 255)
-    @ApiModelProperty(notes = "照片链接", example = "")
-    private String imgUrl;
 
     public PhotoUploadDTO() {
 
