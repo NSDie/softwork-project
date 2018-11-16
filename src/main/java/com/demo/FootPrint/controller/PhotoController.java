@@ -61,4 +61,6 @@ public class PhotoController {
         apiResult.setData(photoMapVOS);
         return apiResult;
     }
+
+
 }

@@ -18,4 +18,6 @@ public class PhotoMapVO {
     private Double longitude;
 
     private Double latitude;
+
+    private String province;
 }

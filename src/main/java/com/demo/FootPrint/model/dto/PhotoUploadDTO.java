@@ -29,6 +29,8 @@ public class PhotoUploadDTO {
     @ApiModelProperty(name = "纬度", example = "26.08")
     private Double latitude;
 
+    @ApiModelProperty(required = true, name = "省份", example = "福建")
+    private String province;
 
     public PhotoUploadDTO() {
 

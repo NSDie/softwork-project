@@ -24,6 +24,8 @@ public class Photo {
 
     private Integer praiseNum;
 
+    private String province;
+
     private String label;
 
     /**
