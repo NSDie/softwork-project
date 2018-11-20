@@ -9,6 +9,7 @@ import com.demo.FootPrint.model.dto.PhotoUploadBackDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadDTO;
 import com.demo.FootPrint.model.po.Photo;
 import com.demo.FootPrint.model.vo.PhotoMapVO;
+import com.demo.FootPrint.model.vo.PhotoMarkVO;
 import com.demo.FootPrint.model.vo.PhotoUploadVO;
 import com.demo.FootPrint.service.PhotoService;
 import com.demo.FootPrint.util.AESUtil;
@@ -19,9 +20,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @program: softwork-project
@@ -111,4 +110,16 @@ public class PhotoServiceImpl implements PhotoService {
         return photoMapVOS;
     }
 
+    @Override
+    public List<PhotoMarkVO> getMark(Integer userId){
+        List<PhotoMarkVO> photoMarkVOS = new ArrayList<>();
+        List<Photo> photoList = photoDao.getAllByUserId(userId);
+        photoList.forEach((photo) ->{
+            PhotoMarkVO photoMarkVO = modelMapper.map(photo,PhotoMarkVO.class);
+            photoMarkVO.setNum(10);
+            photoMarkVOS.add(photoMarkVO);
+        });
+        return photoMarkVOS;
+    }
 }
+

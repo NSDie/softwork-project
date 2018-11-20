@@ -5,6 +5,7 @@ import com.demo.FootPrint.model.dto.PhotoUploadBackDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadDTO;
 import com.demo.FootPrint.model.po.ApiResult;
 import com.demo.FootPrint.model.vo.PhotoMapVO;
+import com.demo.FootPrint.model.vo.PhotoMarkVO;
 import com.demo.FootPrint.model.vo.PhotoUploadVO;
 import com.demo.FootPrint.service.PhotoService;
 import io.swagger.annotations.ApiOperation;
@@ -62,5 +63,13 @@ public class PhotoController {
         return apiResult;
     }
 
+    @ApiOperation(value = "照片记录", notes = "足迹地图、照片遍布的省份")
+    @GetMapping("/mark")
+    public ApiResult<List<PhotoMarkVO>> getMark(HttpSession session){
+        ApiResult<List<PhotoMarkVO>> apiResult = new ApiResult<>();
+        List<PhotoMarkVO> photoMarkVOS = photoService.getMark((Integer) session.getAttribute("userId"));
+        apiResult.setData(photoMarkVOS);
+        return apiResult;
+    }
 
 }
