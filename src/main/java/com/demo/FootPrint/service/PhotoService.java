@@ -2,8 +2,11 @@ package com.demo.FootPrint.service;
 
 import com.demo.FootPrint.model.dto.PhotoUploadBackDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadDTO;
-import com.demo.FootPrint.model.po.Photo;
+import com.demo.FootPrint.model.vo.PhotoMapVO;
+import com.demo.FootPrint.model.vo.PhotoMarkVO;
 import com.demo.FootPrint.model.vo.PhotoUploadVO;
+
+import java.util.List;
 
 public interface PhotoService {
     /**
@@ -20,4 +23,15 @@ public interface PhotoService {
      */
     void uploadBack(PhotoUploadBackDTO photoUploadBackDTO);
 
+
+    /**
+     * 获取照片地图
+     * @return 照片地图视图
+     */
+    List<PhotoMapVO> getMap(Integer userId);
+
+    /**
+     * 获取照片记录
+     */
+    List<PhotoMarkVO> getMark(Integer userId);
 }

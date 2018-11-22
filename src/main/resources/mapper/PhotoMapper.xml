@@ -6,7 +6,7 @@
 
     <insert id="save" parameterType="Photo" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO
-        photo(userId,longitude,latitude,image,time,praiseNum,label,visible)
+        photo(userId,longitude,latitude,image,time,praiseNum,province,label,visible)
         VALUE
         (#{userId},#{longitude},#{latitude},#{imgUrl},#{time},#{praiseNum},#{label},#{visible})
     </insert>
@@ -21,6 +21,7 @@
             image,
             time,
             praiseNum,
+            province,
             label,
             visible
         FROM photo
@@ -34,7 +35,7 @@
            visible=#{visible}
         WHERE id=#{id}
     </update>
-    
+
     <resultMap type="Photo" id="resultListPhoto">
         <id column="id" property="id"/>
         <result column="userId" property="userId"/>
