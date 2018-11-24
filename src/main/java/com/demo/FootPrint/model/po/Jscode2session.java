@@ -14,13 +14,12 @@ import java.io.Serializable;
 @Data
 public class Jscode2session implements Serializable {
 
-    @JsonProperty("unionid")
-    private String unionid;
-
-    @JsonProperty("openid")
-    private String openid;
-
     @JsonProperty("session_key")
     private String sessionKey;
 
+    @JsonProperty("expires_in")
+    private String expires_in;
+
+    @JsonProperty("openid")
+    private String openid;
 }

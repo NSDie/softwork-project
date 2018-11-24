@@ -81,6 +81,7 @@ public class WechatUtil {
             try (CloseableHttpResponse response = client.execute(get)) {
                 HttpEntity entity = response.getEntity();
                 String json = EntityUtils.toString(entity, "utf-8");
+
                 try{
                     return mapper.readValue(json, clazz);
                 }catch (UnrecognizedPropertyException u){

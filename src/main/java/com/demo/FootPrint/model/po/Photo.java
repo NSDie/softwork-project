@@ -26,6 +26,8 @@ public class Photo {
 
     private String province;
 
+    private String city;
+
     private String label;
 
     /**

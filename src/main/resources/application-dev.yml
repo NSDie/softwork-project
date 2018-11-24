@@ -7,7 +7,7 @@ server:
 spring:
   # datasource
   datasource:
-    password: 123456
+    password: caolvji
   # redis
   redis:
     password:
