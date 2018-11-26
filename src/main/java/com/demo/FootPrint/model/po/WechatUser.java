@@ -41,15 +41,11 @@ public class WechatUser implements Serializable {
     @JsonProperty("sessionId")
     private String sessionId;
 
-    @JsonProperty("nickName")
-    private String nickName;
-
     @JsonProperty("language")
     private String language;
 
     @JsonProperty("createTime")
     private Long createTime;
-
 
     public WechatUser() {
     }

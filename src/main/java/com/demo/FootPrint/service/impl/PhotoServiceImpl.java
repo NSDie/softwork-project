@@ -5,6 +5,7 @@ import com.demo.FootPrint.dao.PhotoDao;
 import com.demo.FootPrint.dao.UserDao;
 import com.demo.FootPrint.exception.error.ApiException;
 import com.demo.FootPrint.exception.error.PhotoErrorEnum;
+import com.demo.FootPrint.model.dto.PhotoUpdateDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadBackDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadDTO;
 import com.demo.FootPrint.model.po.Photo;
@@ -31,6 +32,7 @@ import java.util.*;
 @Slf4j
 @Service
 public class PhotoServiceImpl implements PhotoService {
+
     private QiniuConfig qiniuConfig;
 
     private ObjectMapper jsonMapper;
@@ -50,6 +52,7 @@ public class PhotoServiceImpl implements PhotoService {
         this.photoDao = photoDao;
         this.userDao = userDao;
     }
+
 
     @Override
     public PhotoUploadVO upload(PhotoUploadDTO photoUploadDTO, Integer userId) {
@@ -120,6 +123,16 @@ public class PhotoServiceImpl implements PhotoService {
             photoMarkVOS.add(photoMarkVO);
         });
         return photoMarkVOS;
+    }
+    @Override
+    public void delete(Integer photoId,Integer userId){
+        photoDao.delete(photoId);
+    }
+    @Override
+    public void updateLocal(PhotoUpdateDTO photoUpdateDTO){
+        Photo photo = modelMapper.map(photoUpdateDTO,Photo.class);
+        System.out.println(photo.toString());
+        photoDao.updateById(photo);
     }
 }
 

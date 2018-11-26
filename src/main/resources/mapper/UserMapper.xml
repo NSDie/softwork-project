@@ -6,14 +6,14 @@
 
 	<insert id="save" parameterType="WechatUser" keyProperty="userId" useGeneratedKeys="true">
 		INSERT INTO
-			wechat_user(userId,openId, sessionId, nickName, gender, avatarUrl, country, province, city, language, createTime)
+			wechat_user(userId,openId, sessionId, gender, avatarUrl, country, province, city, language, createTime)
 		VALUES
-			(null,#{openId},#{sessionId},#{nickName},#{gender},#{avatarUrl},#{country},#{province},#{city},#{language},#{createTime})
+			(null,#{openId},#{sessionId},#{gender},#{avatarUrl},#{country},#{province},#{city},#{language},#{createTime})
 	</insert>
 
     <select id="getInfo" resultType="WechatUser">
         SELECT
-        	userId, nickName, avatarUrl
+        	userId, avatarUrl
         FROM
         	wechat_user
         WHERE
@@ -22,7 +22,7 @@
 
     <select id="getByOpenId" resultType="WechatUser">
 		SELECT
-        	userId, openId, sessionId, nickName, gender, avatarUrl, country, province, city, language, createTime
+        	userId, openId, sessionId, gender, avatarUrl, country, province, city, language, createTime
 		FROM
 			wechat_user
 		WHERE
@@ -34,7 +34,6 @@
 			userId,
 			openId,
 			sessionId,
-			nickName,
 			gender,
 			avatarUrl,
 			country,

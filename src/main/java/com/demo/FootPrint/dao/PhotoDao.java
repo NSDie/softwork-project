@@ -15,10 +15,13 @@ public interface PhotoDao {
 
     void save(Photo photo);
 
-    void updateVisible(@Param("timeId") Integer timeId, @Param("visible") Byte visible);
+    void updateVisible(@Param("photoId") Integer photoId, @Param("visible") Byte visible);
 
     Photo getById(int id);
 
     List<Photo> getAllByUserId(@Param("userId") Integer userId);
 
+    void updateById(Photo photo);
+
+    void delete(@Param("photoId") Integer photoId);
 }

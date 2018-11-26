@@ -32,6 +32,9 @@ public class PhotoUploadDTO {
     @ApiModelProperty(required = true, name = "省份", example = "福建")
     private String province;
 
+    @ApiModelProperty(required = true, name = "城市", example = "福州")
+    private String city;
+
     public PhotoUploadDTO() {
 
     }

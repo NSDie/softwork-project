@@ -61,8 +61,8 @@ mybatis:
 
 # wechat
 wechat:
-  appID:
-  appSecret:
+  appID: wxcf8e298028850573
+  appSecret: 7719dd1b91866326c32482a03ec7b77c
 
 # melody
 javamelody:

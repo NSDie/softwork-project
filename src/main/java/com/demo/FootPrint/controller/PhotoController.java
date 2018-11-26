@@ -1,6 +1,7 @@
 package com.demo.FootPrint.controller;
 
 
+import com.demo.FootPrint.model.dto.PhotoUpdateDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadBackDTO;
 import com.demo.FootPrint.model.dto.PhotoUploadDTO;
 import com.demo.FootPrint.model.po.ApiResult;
@@ -72,4 +73,21 @@ public class PhotoController {
         return apiResult;
     }
 
+    @ApiOperation(value = "照片删除", notes = "根据照片id删除照片")
+    @PostMapping("/delete")
+    public ApiResult<String> delete(@RequestBody @Valid Integer photoId, HttpSession session) {
+        ApiResult<String> apiResult = new ApiResult<>();
+        photoService.delete(photoId,(Integer) session.getAttribute("userId"));
+        apiResult.setText("delete success！");
+        return apiResult;
+    }
+
+    @ApiOperation(value = "照片更新", notes = "更新照片的各种信息")
+    @PostMapping("/update")
+    public ApiResult<String> update(@RequestBody @Valid PhotoUpdateDTO photoUpdateDTO, HttpSession session) {
+        ApiResult<String> apiResult = new ApiResult<>();
+        photoService.updateLocal(photoUpdateDTO);
+        apiResult.setText("update success!");
+        return apiResult;
+    }
 }
