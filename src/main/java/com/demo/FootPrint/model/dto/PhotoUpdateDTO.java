@@ -9,18 +9,17 @@ import javax.validation.constraints.Size;
 
 /**
  * @program: softwork-project
- * @description: 照片上传实体
+ * @description: 照片更新实体
  * @author: Yyf
- * @create: 2018-11-13 16:51
+ * @create: 2018-11-25 20:33
  **/
 @Data
-@ApiModel(description = "照片上传传输对象")
-public class PhotoUploadDTO {
+@ApiModel(description = "照片更新实体")
+public class PhotoUpdateDTO {
 
     @NotNull
-    @Size(min = 1, max = 20)
-    @ApiModelProperty(required = true, name = "标签", example = "福州大学!")
-    private String label;
+    @ApiModelProperty(name = "照片ID", example = "1")
+    private Integer id;
 
     // 当用户拒绝获取地理位置时为空
     @ApiModelProperty(name = "经度", example = "119.3")
@@ -35,7 +34,10 @@ public class PhotoUploadDTO {
     @ApiModelProperty(required = true, name = "城市", example = "福州")
     private String city;
 
-    public PhotoUploadDTO() {
+    @ApiModelProperty(required = true, name = "时间", example = " ")
+    private Long photoTime;
+
+    public PhotoUpdateDTO() {
 
     }
 

@@ -26,8 +26,11 @@ public class Photo {
 
     private String province;
 
+    private String city;
+
     private String label;
 
+    private Long photoTime;
     /**
      * 上传成功or失败
      * 1：已上传
