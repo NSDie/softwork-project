@@ -10,12 +10,12 @@ spring:
   datasource:
     # mysql
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/footprint?characterEncoding=utf-8
-    username: footprint
-    password: 123456
+    url: jdbc:mysql://localhost:3306/caolvji?characterEncoding=utf-8&useSSL=false&useUnicode=true
+    username: caolvji
+    password: caolvji
     # druid
     type: com.alibaba.druid.pool.DruidDataSource
-    name: footprint
+    name: caolvjiDataSource
     druid:
       # 连接池初始大小 最小 最大
       initialSize: 1
@@ -61,8 +61,8 @@ mybatis:
 
 # wechat
 wechat:
-  appID:
-  appSecret:
+  appID: wxcf8e298028850573
+  appSecret: 7719dd1b91866326c32482a03ec7b77c
 
 # melody
 javamelody:
@@ -84,5 +84,5 @@ qiniu:
   tokenExpires: 180
   backSecretKey: 2a640bf3701da3e7
   # 服务器地址,请根据部署的服务器进行变更,推荐使用内网穿透进行测试
-  backUrl:
+  backUrl:  http://demo.yyf-blog.com/photo/uploadBack
   cloudUrl: http://foot.yyf-blog.com/

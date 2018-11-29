@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# spring
+spring:
+  # datasource
+  datasource:
+    password: caolvji
+  # redis
+  redis:
+    password:
+
+# swagger 配置接口访问域名
+swagger:
+  host: localhost
