@@ -61,8 +61,8 @@ mybatis:
 
 # wechat
 wechat:
-  appID: wxcf8e298028850573
-  appSecret: 7719dd1b91866326c32482a03ec7b77c
+  appID:
+  appSecret:
 
 # melody
 javamelody:
@@ -78,11 +78,11 @@ javamelody:
 
 # 七牛云
 qiniu:
-  accessKey: geM1tkff5cDM4vWD1g_jh5AVkImzeNCIE9an7mjR
-  secretKey: AuNc4qz-UAq-Xr2GVeyW17JcGcRhkElP2Z_ysRR1
-  bucket: footprint
+  accessKey:
+  secretKey:
+  bucket:
   tokenExpires: 180
-  backSecretKey: 2a640bf3701da3e7
+  backSecretKey:
   # 服务器地址,请根据部署的服务器进行变更,推荐使用内网穿透进行测试
-  backUrl:  http://demo.yyf-blog.com/photo/uploadBack
-  cloudUrl: http://foot.yyf-blog.com/
+  backUrl:
+  cloudUrl:
