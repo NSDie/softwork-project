@@ -94,6 +94,7 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public void uploadBack(PhotoUploadBackDTO photoUploadBackDTO){
         String rightKey = AESUtil.decrypt(photoUploadBackDTO.getEncryptedId(), qiniuConfig.getBackSecretKey());
+        System.out.println("我被调用了！");
         if (rightKey != null && photoUploadBackDTO.getId().equals(rightKey)) {
             // 上传成功
             photoDao.updateVisible(Integer.valueOf(photoUploadBackDTO.getId()), (byte) 1);
@@ -126,13 +127,17 @@ public class PhotoServiceImpl implements PhotoService {
     }
     @Override
     public void delete(Integer photoId,Integer userId){
-        photoDao.delete(photoId);
+        try {
+            photoDao.delete(photoId, userId);
+        } catch (Exception e){
+            throw new ApiException(PhotoErrorEnum.BACK_INVALID);
+        }
     }
     @Override
-    public void updateLocal(PhotoUpdateDTO photoUpdateDTO){
+    public void updateLocal(PhotoUpdateDTO photoUpdateDTO, Integer userId){
         Photo photo = modelMapper.map(photoUpdateDTO,Photo.class);
         System.out.println(photo.toString());
-        photoDao.updateById(photo);
+        photoDao.updateById(photo, userId);
     }
 }
 

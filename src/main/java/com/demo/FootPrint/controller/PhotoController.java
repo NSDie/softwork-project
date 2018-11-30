@@ -47,7 +47,7 @@ public class PhotoController {
         return apiResult;
     }
 
-    @ApiOperation(value = "时光发布回调", notes = "由七牛云服务器发出,用于校验图片成功上传")
+    @ApiOperation(value = "照片上传回调", notes = "由七牛云服务器发出,用于校验图片成功上传")
     @PostMapping("/uploadBack")
     public ApiResult<String> uploadBack(@RequestBody PhotoUploadBackDTO photoUploadBackDTO) {
         ApiResult<String> apiResult = new ApiResult<>();
@@ -86,7 +86,7 @@ public class PhotoController {
     @PostMapping("/update")
     public ApiResult<String> update(@RequestBody @Valid PhotoUpdateDTO photoUpdateDTO, HttpSession session) {
         ApiResult<String> apiResult = new ApiResult<>();
-        photoService.updateLocal(photoUpdateDTO);
+        photoService.updateLocal(photoUpdateDTO, (Integer) session.getAttribute("userId"));
         apiResult.setText("update success!");
         return apiResult;
     }

@@ -30,6 +30,8 @@ public class Photo {
 
     private String label;
 
+    private String address;
+
     private Long photoTime;
     /**
      * 上传成功or失败
