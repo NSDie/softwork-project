@@ -34,6 +34,9 @@ public class PhotoUpdateDTO {
     @ApiModelProperty(required = true, name = "城市", example = "福州")
     private String city;
 
+    @ApiModelProperty(required = true, name = "地址", example = "闽侯县上街镇")
+    private String address;
+
     @ApiModelProperty(required = true, name = "时间", example = " ")
     private Long photoTime;
 
