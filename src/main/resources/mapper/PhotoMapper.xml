@@ -6,9 +6,9 @@
 
     <insert id="save" parameterType="Photo" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO
-        photo(userId,longitude,latitude,image,time,praiseNum,province,city,label,visible,photoTime)
+        photo(userId,longitude,latitude,image,time,praiseNum,province,city,label,address,visible,photoTime)
         VALUE
-        (#{userId},#{longitude},#{latitude},#{imgUrl},#{time},#{praiseNum},#{province},#{city},#{label},#{visible},#{photoTime})
+        (#{userId},#{longitude},#{latitude},#{imgUrl},#{time},#{praiseNum},#{province},#{city},#{label},#{address},#{visible},#{photoTime})
     </insert>
     
     
@@ -25,6 +25,7 @@
             label,
             city,
             visible,
+            address,
             photoTime
         FROM photo
         WHERE id=#{id}
@@ -62,12 +63,13 @@
             latitude=#{latitude},
             province=#{province},
             city=#{city},
+            address=#{address},
             photoTime=#{photoTime}
-        WHERE id=#{id}
+        WHERE id=#{id} and userId=#{userId}
     </update>
 
     <delete id="delete">
         DELETE  FROM photo
-        WHERE  id=#{id}
+        WHERE  id=#{id} and userId=#{userId}
     </delete>
 </mapper>

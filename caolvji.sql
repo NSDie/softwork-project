@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-11-26 18:53:07
+Date: 2018-11-30 16:05:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,24 +22,23 @@ DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `userId` int(11) DEFAULT NULL,
-  `longitude` float DEFAULT NULL,
-  `latitude` float DEFAULT NULL,
+  `longitude` double(20,10) DEFAULT NULL,
+  `latitude` double(20,10) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `time` bigint(20) DEFAULT NULL,
   `praiseNum` int(11) DEFAULT NULL,
   `label` varchar(255) DEFAULT NULL,
   `province` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `visible` int(11) DEFAULT NULL,
   `photoTime` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of photo
 -- ----------------------------
-INSERT INTO `photo` VALUES ('1', '1', '119.3', '26.08', 'http://foot.yyf-blog.com/48766d8108244e8bb4ed4a4e8062d7c3', '1542198417989', '0', '测试', '福建', '福州', '0', '0');
-INSERT INTO `photo` VALUES ('2', '1', null, null, 'http://foot.yyf-blog.com/8f96cb0c5ed944bcb77fe1c7fa8fad40', '1543226758944', '0', 'aaaa', null, null, '0', null);
 
 -- ----------------------------
 -- Table structure for `wechat_user`
@@ -62,5 +61,3 @@ CREATE TABLE `wechat_user` (
 -- ----------------------------
 -- Records of wechat_user
 -- ----------------------------
-INSERT INTO `wechat_user` VALUES ('1', 'oi4T64i99AgPnFrPl4SEz9oaOKFo', null, '1', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPt3hefZ5CMYbCiag7icR4vUKffpian3Pbtovm54TE5hO2FfY7RTLCDcrSr8EU60hfibnw05LHEXICeA/132', 'China', 'Fujian', 'Xiamen', 'zh_CN', '1538474959');
-INSERT INTO `wechat_user` VALUES ('2', 'oVUDw0JPJ4epCQap9Pp-uCL6p0I4', 'YU9pOsHQLWS8mrSazitEAlPRvbK0lyDeUwHAyoXfUHASE/5lwH7LI7EMu21O8hKE', '1', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJzmBzIeVHkjn4R9GxzBdrzcTFcTmQYzcoWt1FFB0tkciaRL7pROk7ysHTJsjj39C8g0gCtBReiaYSA/132', 'China', 'Zhejiang', 'Wenzhou', 'zh_CN', '1543036223');

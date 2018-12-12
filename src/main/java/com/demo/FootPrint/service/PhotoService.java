@@ -51,5 +51,5 @@ public interface PhotoService {
      * @param
      *
      */
-    void updateLocal(PhotoUpdateDTO photoUpdateDTO);
+    void updateLocal(PhotoUpdateDTO photoUpdateDTO, Integer userId);
 }

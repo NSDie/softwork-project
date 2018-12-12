@@ -17,11 +17,11 @@ public interface PhotoDao {
 
     void updateVisible(@Param("photoId") Integer photoId, @Param("visible") Byte visible);
 
-    Photo getById(int id);
+    Photo getById(@Param("id") Integer id);
 
     List<Photo> getAllByUserId(@Param("userId") Integer userId);
 
-    void updateById(Photo photo);
+    void updateById(Photo photo, @Param("userId") Integer userId);
 
-    void delete(@Param("photoId") Integer photoId);
+    void delete(@Param("photoId") Integer photoId, @Param("userId") Integer userId);
 }
