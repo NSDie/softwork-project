@@ -20,4 +20,9 @@ public class PhotoMapVO {
     private Double latitude;
 
     private String province;
+
+    private String city;
+
+    private String address;
+
 }

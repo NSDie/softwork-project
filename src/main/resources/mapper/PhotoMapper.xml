@@ -59,13 +59,13 @@
     <update id="updateById" parameterType="Photo">
         UPDATE  photo
         SET
-            longitude=#{longitude},
-            latitude=#{latitude},
-            province=#{province},
-            city=#{city},
-            address=#{address},
-            photoTime=#{photoTime}
-        WHERE id=#{id} and userId=#{userId}
+            longitude=#{photo.longitude},
+            latitude=#{photo.latitude},
+            province=#{photo.province},
+            city=#{photo.city},
+            address=#{photo.address},
+            photoTime=#{photo.photoTime}
+        WHERE id=#{photo.id} and userId=#{userId}
     </update>
 
     <delete id="delete">

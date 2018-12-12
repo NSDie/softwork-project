@@ -136,8 +136,8 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public void updateLocal(PhotoUpdateDTO photoUpdateDTO, Integer userId){
         Photo photo = modelMapper.map(photoUpdateDTO,Photo.class);
-        System.out.println(photo.toString());
         photoDao.updateById(photo, userId);
     }
+
 }
 
