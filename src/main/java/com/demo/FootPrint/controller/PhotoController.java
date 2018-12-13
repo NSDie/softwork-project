@@ -92,7 +92,7 @@ public class PhotoController {
     }
 
     @ApiOperation(value = "用户数据", notes = "统计用户去过的地方的数据")
-    @PostMapping("/update")
+    @PostMapping("/count")
     public ApiResult<List<String>> count(@RequestBody @Valid Integer startTime,@RequestBody @Valid Integer endTime, HttpSession session) {
         ApiResult<List<String>> apiResult = new ApiResult<>();
         List<String> res = photoService.cal_vised_place((Integer) session.getAttribute("userId"), startTime, endTime);
