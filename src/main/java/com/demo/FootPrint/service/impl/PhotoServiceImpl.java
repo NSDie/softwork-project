@@ -16,6 +16,7 @@ import com.demo.FootPrint.service.PhotoService;
 import com.demo.FootPrint.util.AESUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,6 +138,84 @@ public class PhotoServiceImpl implements PhotoService {
     public void updateLocal(PhotoUpdateDTO photoUpdateDTO, Integer userId){
         Photo photo = modelMapper.map(photoUpdateDTO,Photo.class);
         photoDao.updateById(photo, userId);
+    }
+
+    @Override
+    public  List<String> cal_vised_place(Integer userId,Integer start_time,Integer end_time){
+        List<Photo> photoList = photoDao.getAllByUserId(userId);
+        List<String> retString = new ArrayList<>();
+        Double E=0.0,S=90.0,W=180.0,N=0.0;
+        String[] Pro={"空","空","空","空"};
+        String[] Cit={"空","空","空","空"};
+        Collections.sort(photoList, new Comparator<Photo>() {//时间排序
+            @Override
+            public int compare(Photo o1, Photo o2) {
+                int i=(int)(o1.getPhotoTime()-o2.getPhotoTime());
+                return i;
+            }
+        });
+        Map<String,Integer> vis_province = new HashMap<String,Integer>();
+        Map<String,Integer> vis_city = new HashMap<String,Integer>();
+        List<String> orderpro=new ArrayList<>();
+        List<String> ordercit=new ArrayList<>();
+        String most_province="",most_city="";
+        Integer valp=0,valc=0;
+        int cnt=0;
+        for(Photo photo:photoList){
+            long t=photo.getPhotoTime();
+            if(t<=end_time&&t>start_time){
+                cnt++;
+                Integer val=vis_city.get(photo.getCity());
+                if(val==null) {
+                    if(valc==0){
+                        most_city=photo.getCity();
+                        valc=1;
+                    }
+                    ordercit.add(photo.getCity());
+                    vis_city.put(photo.getCity(), 1);
+                }
+                else {
+                    vis_city.put(photo.getCity(), val + 1);
+                    if(valc<val+1){
+                        most_city=photo.getCity();
+                        valc=val+1;
+                    }
+                }
+                val=vis_province.get(photo.getProvince());
+                if(val==null) {
+                    if(valp==0){
+                        most_province=photo.getProvince();
+                        valp=1;
+                    }
+                    orderpro.add(photo.getProvince());
+                    vis_province.put(photo.getProvince(), 1);
+                }
+                else
+                {
+                    vis_province.put(photo.getProvince(),val+1);
+                    if(valp<val+1){
+                        most_province=photo.getProvince();
+                        valp=val+1;
+                    }
+                }
+                Double sn=photo.getLatitude();
+                Double ew=photo.getLongitude();
+                if(sn<S){ S=sn;Pro[1]=photo.getProvince();Cit[1]=photo.getCity();}
+                if(sn>N){ N=sn;Pro[3]=photo.getProvince();Cit[3]=photo.getCity();}
+                if(ew>E){ E=ew;Pro[0]=photo.getProvince();Cit[0]=photo.getCity();}
+                if(ew<W){ W=ew;Pro[2]=photo.getProvince();Cit[2]=photo.getCity();}
+            }
+        }
+
+        retString.add(vis_province.size()+"");
+        retString.add(vis_city.size()+"");
+        retString.add(cnt+"");
+        retString.add(most_province);
+        retString.add(most_city);
+        for(int i=0;i<4;++i) retString.add(Pro[i]);
+        for(int i=0;i<4;++i) retString.add(Cit[i]);
+        for(String cit:ordercit) retString.add(cit);
+        return  retString;
     }
 
 }

@@ -52,4 +52,21 @@ public interface PhotoService {
      *
      */
     void updateLocal(PhotoUpdateDTO photoUpdateDTO, Integer userId);
+
+    /**
+     * 统计函数
+     * @param userId
+     * @param start_time
+     * @param end_time
+     * @return
+     *  1.去过的省份数量
+     *  2.去过的城市数量
+     *  3.发过的照片数
+     *  4.去过最多的省份
+     *  5.去过最多的城市
+     *  6.最东南西北的省份 4个数据按顺序
+     *  7.最东南西北的城市 4个数据按顺序
+     *  8.这个段时间去过的城市顺序-有bug
+     */
+    List<String> cal_vised_place(Integer userId,Integer start_time,Integer end_time);
 }
