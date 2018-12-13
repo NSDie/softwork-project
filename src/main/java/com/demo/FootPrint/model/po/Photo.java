@@ -10,6 +10,7 @@ import lombok.Data;
  **/
 @Data
 public class Photo {
+
     private Integer id;
 
     private Integer userId;
