@@ -192,7 +192,7 @@ public class PhotoServiceImpl implements PhotoService {
                 }
                 else
                 {
-                    vis_province.put(photo.getProvince(),val+1)
+                    vis_province.put(photo.getProvince(),val+1);
                     if(valp<val+1){
                         most_province=photo.getProvince();
                         valp=val+1;
