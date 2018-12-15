@@ -145,12 +145,15 @@ public class PhotoServiceImpl implements PhotoService {
         List<Photo> photoList = photoDao.getAllByUserId(userId);
         List<String> retString = new ArrayList<>();
         Double E=0.0,S=90.0,W=180.0,N=0.0;
-        String[] Pro={"空","空","空","空"};
-        String[] Cit={"空","空","空","空"};
+        String[] Pro={"#","#","#","#"};
+        String[] Cit={"#","#","#","#"};
         Collections.sort(photoList, new Comparator<Photo>() {//时间排序
             @Override
             public int compare(Photo o1, Photo o2) {
-                int i=(int)(o1.getPhotoTime()-o2.getPhotoTime());
+                int i;
+                if(o1.getPhotoTime()!=null && o1.getPhotoTime()!=null)
+                i=(int)(o1.getPhotoTime()-o2.getPhotoTime());
+                else i=(int)(o1.getTime()-o2.getTime());
                 return i;
             }
         });
@@ -158,55 +161,77 @@ public class PhotoServiceImpl implements PhotoService {
         Map<String,Integer> vis_city = new HashMap<String,Integer>();
         List<String> orderpro=new ArrayList<>();
         List<String> ordercit=new ArrayList<>();
-        String most_province="",most_city="";
+        String most_province="#",most_city="#";
         Integer valp=0,valc=0;
         int cnt=0;
         for(Photo photo:photoList){
-            long t=photo.getPhotoTime();
+            long t;
+            if(photo.getPhotoTime()!=null)
+            t=photo.getPhotoTime();
+            else t=photo.getTime();
             if(t<=end_time&&t>start_time){
                 cnt++;
-                Integer val=vis_city.get(photo.getCity());
-                if(val==null) {
-                    if(valc==0){
-                        most_city=photo.getCity();
-                        valc=1;
+                Integer val=null;
+                if(photo.getCity()!=null) {
+                    val = vis_city.get(photo.getCity());
+                    if (val == null) {
+                        if (valc == 0) {
+                            most_city = photo.getCity();
+                            valc = 1;
+                        }
+                        ordercit.add(photo.getCity());
+                        vis_city.put(photo.getCity(), 1);
+                    } else {
+                        vis_city.put(photo.getCity(), val + 1);
+                        if (valc < val + 1) {
+                            most_city = photo.getCity();
+                            valc = val + 1;
+                        }
                     }
-                    ordercit.add(photo.getCity());
-                    vis_city.put(photo.getCity(), 1);
                 }
-                else {
-                    vis_city.put(photo.getCity(), val + 1);
-                    if(valc<val+1){
-                        most_city=photo.getCity();
-                        valc=val+1;
-                    }
-                }
-                val=vis_province.get(photo.getProvince());
-                if(val==null) {
-                    if(valp==0){
-                        most_province=photo.getProvince();
-                        valp=1;
-                    }
-                    orderpro.add(photo.getProvince());
-                    vis_province.put(photo.getProvince(), 1);
-                }
-                else
-                {
-                    vis_province.put(photo.getProvince(),val+1);
-                    if(valp<val+1){
-                        most_province=photo.getProvince();
-                        valp=val+1;
+                val=null;
+                if(photo.getProvince()!="") {
+                    val = vis_province.get(photo.getProvince());
+                    if (val == null) {
+                        if (valp == 0) {
+                            most_province = photo.getProvince();
+                            valp = 1;
+                        }
+                        orderpro.add(photo.getProvince());
+                        vis_province.put(photo.getProvince(), 1);
+                    } else {
+                        vis_province.put(photo.getProvince(), val + 1);
+                        if (valp < val + 1) {
+                            most_province = photo.getProvince();
+                            valp = val + 1;
+                        }
                     }
                 }
                 Double sn=photo.getLatitude();
                 Double ew=photo.getLongitude();
-                if(sn<S){ S=sn;Pro[1]=photo.getProvince();Cit[1]=photo.getCity();}
-                if(sn>N){ N=sn;Pro[3]=photo.getProvince();Cit[3]=photo.getCity();}
-                if(ew>E){ E=ew;Pro[0]=photo.getProvince();Cit[0]=photo.getCity();}
-                if(ew<W){ W=ew;Pro[2]=photo.getProvince();Cit[2]=photo.getCity();}
+
+                if(sn<S && sn!=null){
+                    S=sn;
+                    if(photo.getProvince()!="") Pro[1]=photo.getProvince();
+                    if(photo.getCity()!=null) Cit[1]=photo.getCity();
+                }
+                if(sn>N && sn!=null){
+                    N=sn;
+                    if(photo.getProvince()!="") Pro[3]=photo.getProvince();
+                    if(photo.getCity()!=null) Cit[3]=photo.getCity();
+                }
+                if(ew>E && ew!=null){
+                    E=ew;
+                    if(photo.getProvince()!="") Pro[0]=photo.getProvince();
+                    if(photo.getCity()!=null) Cit[0]=photo.getCity();
+                }
+                if(ew<W && ew!=null){
+                    W=ew;
+                    if(photo.getProvince()!="") Pro[2]=photo.getProvince();
+                    if(photo.getCity()!=null) Cit[2]=photo.getCity();
+                }
             }
         }
-
         retString.add(vis_province.size()+"");
         retString.add(vis_city.size()+"");
         retString.add(cnt+"");
@@ -217,6 +242,5 @@ public class PhotoServiceImpl implements PhotoService {
         for(String cit:ordercit) retString.add(cit);
         return  retString;
     }
-
 }
 
