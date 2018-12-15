@@ -7,6 +7,7 @@ import com.demo.FootPrint.model.vo.PhotoMapVO;
 import com.demo.FootPrint.model.vo.PhotoMarkVO;
 import com.demo.FootPrint.model.vo.PhotoUploadVO;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface PhotoService {
@@ -68,5 +69,5 @@ public interface PhotoService {
      *  7.最东南西北的城市 4个数据按顺序
      *  8.这个段时间去过的城市顺序-有bug
      */
-    List<String> cal_vised_place(Integer userId,Integer start_time,Integer end_time);
+    List<String> cal_vised_place(Integer userId, Long start_time, Long end_time);
 }

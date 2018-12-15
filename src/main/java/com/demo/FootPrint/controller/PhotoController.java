@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -92,10 +93,17 @@ public class PhotoController {
     }
 
     @ApiOperation(value = "用户数据", notes = "统计用户去过的地方的数据")
-    @PostMapping("/count")
-    public ApiResult<List<String>> count(@RequestBody @Valid Integer startTime,@RequestBody @Valid Integer endTime, HttpSession session) {
+    @GetMapping("/count")
+    public ApiResult<List<String>> count(@RequestParam Long startTime, @RequestParam  Long endTime, HttpSession session) {
         ApiResult<List<String>> apiResult = new ApiResult<>();
-        List<String> res = photoService.cal_vised_place((Integer) session.getAttribute("userId"), startTime, endTime);
+        startTime = new Long(0);
+        endTime = new Long(999999999);
+        System.out.println(startTime);
+        System.out.println(endTime);
+        List<String> res = photoService.cal_vised_place(6, startTime, endTime);
+
+        //List<String> res = photoService.cal_vised_place((Integer) session.getAttribute("userId"), startTime, endTime);
+        System.out.println(res);
         apiResult.setData(res);
         return apiResult;
     }
