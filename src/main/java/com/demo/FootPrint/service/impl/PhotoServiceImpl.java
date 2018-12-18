@@ -158,12 +158,12 @@ public class PhotoServiceImpl implements PhotoService {
                 return i;
             }
         });
-        Map<String,Integer> vis_province = new HashMap<String,Integer>();
-        Map<String,Integer> vis_city = new HashMap<String,Integer>();
+        Map<String,Integer> vis_province = new HashMap<>();
+        Map<String,Integer> vis_city = new HashMap<>();
         List<String> orderPro=new ArrayList<>();
         List<String> orderCit=new ArrayList<>();
         String most_province="#",most_city="#";
-        Integer valp=0,valc=0;
+        Integer valP=0,valC=0;
         int cnt=0;
         for(Photo photo:photoList){
             Long t;
@@ -180,17 +180,17 @@ public class PhotoServiceImpl implements PhotoService {
                 if(photo.getCity()!=null) {
                     val = vis_city.get(photo.getCity());
                     if (val == null) {
-                        if (valc == 0) {
+                        if (valC == 0) {
                             most_city = photo.getCity();
-                            valc = 1;
+                            valC = 1;
                         }
                         orderCit.add(photo.getCity());
                         vis_city.put(photo.getCity(), 1);
                     } else {
                         vis_city.put(photo.getCity(), val + 1);
-                        if (valc < val + 1) {
+                        if (valC < val + 1) {
                             most_city = photo.getCity();
-                            valc = val + 1;
+                            valC = val + 1;
                         }
                     }
                 }
@@ -198,17 +198,17 @@ public class PhotoServiceImpl implements PhotoService {
                 if(!photo.getProvince().equals("")) {
                     val = vis_province.get(photo.getProvince());
                     if (val == null) {
-                        if (valp == 0) {
+                        if (valP == 0) {
                             most_province = photo.getProvince();
-                            valp = 1;
+                            valP = 1;
                         }
                         orderPro.add(photo.getProvince());
                         vis_province.put(photo.getProvince(), 1);
                     } else {
                         vis_province.put(photo.getProvince(), val + 1);
-                        if (valp < val + 1) {
+                        if (valP < val + 1) {
                             most_province = photo.getProvince();
-                            valp = val + 1;
+                            valP = val + 1;
                         }
                     }
                 }

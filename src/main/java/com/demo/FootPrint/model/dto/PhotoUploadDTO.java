@@ -35,6 +35,9 @@ public class PhotoUploadDTO {
     @ApiModelProperty(required = true, name = "城市", example = "福州")
     private String city;
 
+    @ApiModelProperty(required = true, name = "照片时间(时间戳)", example = "19198181")
+    private Integer photoTime;
+
     public PhotoUploadDTO() {
 
     }
