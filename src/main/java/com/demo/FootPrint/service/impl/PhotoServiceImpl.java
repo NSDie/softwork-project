@@ -148,20 +148,20 @@ public class PhotoServiceImpl implements PhotoService {
         Double E=0.0,S=90.0,W=180.0,N=0.0;
         String[] Pro={"#","#","#","#"};
         String[] Cit={"#","#","#","#"};
-        Collections.sort(photoList, new Comparator<Photo>() {//时间排序
-            @Override
-            public int compare(Photo o1, Photo o2) {
-                int i;
-                if(o1.getPhotoTime()!=null && o1.getPhotoTime()!=null)
-                i=(int)(o1.getPhotoTime()-o2.getPhotoTime());
-                else i=(int)(o1.getTime()-o2.getTime());
-                return i;
-            }
-        });
+//        Collections.sort(photoList, new Comparator<Photo>() {//时间排序
+//            @Override
+//            public int compare(Photo o1, Photo o2) {
+//                int i;
+//                if(o1.getPhotoTime()!=null && o1.getPhotoTime()!=null)
+//                i=(int)(o1.getPhotoTime()-o2.getPhotoTime());
+//                else i=(int)(o1.getTime()-o2.getTime());
+//                return i;
+//            }
+//        });
         Map<String,Integer> vis_province = new HashMap<>();
         Map<String,Integer> vis_city = new HashMap<>();
-        List<String> orderPro=new ArrayList<>();
-        List<String> orderCit=new ArrayList<>();
+        //List<String> orderPro=new ArrayList<>();
+        //List<String> orderCit=new ArrayList<>();
         String photo_url1="#";
         String photo_url2="#";
         String photo_url3="#";
@@ -183,7 +183,7 @@ public class PhotoServiceImpl implements PhotoService {
                             most_city = photo.getCity();
                             valC = 1;
                         }
-                        orderCit.add(photo.getCity());
+                        //orderCit.add(photo.getCity());
                         vis_city.put(photo.getCity(), 1);
                     } else {
                         vis_city.put(photo.getCity(), val + 1);
@@ -204,7 +204,7 @@ public class PhotoServiceImpl implements PhotoService {
                             most_province = photo.getProvince();
                             valP = 1;
                         }
-                        orderPro.add(photo.getProvince());
+                        //orderPro.add(photo.getProvince());
                         vis_province.put(photo.getProvince(), 1);
                     } else {
                         vis_province.put(photo.getProvince(), val + 1);
@@ -272,7 +272,7 @@ public class PhotoServiceImpl implements PhotoService {
         for(int i=0;i<4;++i) retString.add(Pro[i]);
         for(int i=0;i<4;++i) retString.add(Cit[i]);
 
-        for(String cit:orderCit) retString.add(cit);
+        //for(String cit:orderCit) retString.add(cit);
         return  retString;
     }
 }
