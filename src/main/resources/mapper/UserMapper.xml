@@ -13,7 +13,7 @@
 
     <select id="getInfo" resultType="WechatUser">
         SELECT
-        	userId, avatarUrl
+        	userId, avatarUrl, openId
         FROM
         	wechat_user
         WHERE

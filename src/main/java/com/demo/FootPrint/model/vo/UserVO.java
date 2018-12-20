@@ -16,4 +16,6 @@ public class UserVO implements Serializable {
     private Integer userId;
 
     private String avatarUrl;
+
+    private String openId;
 }

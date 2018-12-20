@@ -115,6 +115,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO getMe(Integer userId) {
         WechatUser wechatUser = userDao.getInfo(userId);
+
         return modelMapper.map(wechatUser, UserVO.class);
     }
 
