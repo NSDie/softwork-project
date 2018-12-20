@@ -162,12 +162,24 @@ public class PhotoServiceImpl implements PhotoService {
         Map<String,Integer> vis_city = new HashMap<>();
         List<String> orderPro=new ArrayList<>();
         List<String> orderCit=new ArrayList<>();
+        String photo_url1="#";
+        String photo_url2="#";
+        String photo_url3="#";
+        String photo_url4="#";
         String most_province="#",most_city="#";
         Integer valP=0,valC=0;
         int cnt=0;
         for(Photo photo:photoList){
+            if(photo_url1.equals("#")){
+                photo_url1=photo.getImgUrl();
+            }
+            if(photo_url2.equals("#")){
+                photo_url2=photo.getImgUrl();
+            }
+            if(photo_url3.equals("#")){
+                photo_url3=photo.getImgUrl();
+            }
             Long t;
-
             if(photo.getPhotoTime()!=null){
                 t=photo.getPhotoTime();
             }else{
@@ -199,6 +211,7 @@ public class PhotoServiceImpl implements PhotoService {
                     val = vis_province.get(photo.getProvince());
                     if (val == null) {
                         if (valP == 0) {
+                            photo_url1=photo.getImgUrl();
                             most_province = photo.getProvince();
                             valP = 1;
                         }
@@ -207,6 +220,7 @@ public class PhotoServiceImpl implements PhotoService {
                     } else {
                         vis_province.put(photo.getProvince(), val + 1);
                         if (valP < val + 1) {
+                            photo_url1=photo.getImgUrl();
                             most_province = photo.getProvince();
                             valP = val + 1;
                         }
@@ -214,7 +228,7 @@ public class PhotoServiceImpl implements PhotoService {
                 }
                 Double sn=photo.getLatitude();
                 Double ew=photo.getLongitude();
-                if (sn != null && ew != null) {
+                if (sn != null && ew != null){
                     if(sn<S){
                         S=sn;
                         if(!photo.getProvince().equals("")) Pro[1]=photo.getProvince();
@@ -222,8 +236,10 @@ public class PhotoServiceImpl implements PhotoService {
                     }
                     if(sn>N){
                         N=sn;
+                        photo_url2=photo.getImgUrl();
                         if(!photo.getProvince().equals("")) Pro[3]=photo.getProvince();
-                        if(photo.getCity()!=null) Cit[3]=photo.getCity();
+                        if(photo.getCity()!=null)
+                            Cit[3] = photo.getCity();
                     }
                     if(ew>E){
                         E=ew;
@@ -232,20 +248,26 @@ public class PhotoServiceImpl implements PhotoService {
                     }
                     if(ew<W){
                         W=ew;
+                        photo_url4=photo.getImgUrl();
                         if(!photo.getProvince().equals("")) Pro[2]=photo.getProvince();
                         if(photo.getCity()!=null) Cit[2]=photo.getCity();
                     }
                 }
-
             }
+            photo_url3=photo.getImgUrl();
         }
         retString.add(vis_province.size()+"");
         retString.add(vis_city.size()+"");
         retString.add(cnt+"");
         retString.add(most_province);
         retString.add(most_city);
+        retString.add(photo_url1);//最经常去的省份中其中一张照片
+        retString.add(photo_url2);//最北方的照片
+        retString.add(photo_url4);//最西边的照片
+        retString.add(photo_url3);//最新一次的照片
         for(int i=0;i<4;++i) retString.add(Pro[i]);
         for(int i=0;i<4;++i) retString.add(Cit[i]);
+
         for(String cit:orderCit) retString.add(cit);
         return  retString;
     }
