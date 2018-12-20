@@ -68,10 +68,12 @@ public interface PhotoService {
      *  6.最东南西北的省份 4个数据按顺序
      *  7.最东南西北的城市 4个数据按顺序
      * 最经常去的省份中其中一张照片
-     * 最北方的照片
-     * 最西边的照片
      * 最新一次的照片
-     *  8.这个段时间去过的城市顺序-有bug
+     * 最东方的照片
+     * 最南边的照片
+     * 最西边的照片
+     * 最北边的照片
+     * 8.这个段时间去过的城市顺序-有bug
      */
     List<String> cal_vised_place(Integer userId, Long start_time, Long end_time);
 }
