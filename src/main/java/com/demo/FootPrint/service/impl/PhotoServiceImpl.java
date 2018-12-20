@@ -171,30 +171,9 @@ public class PhotoServiceImpl implements PhotoService {
         String most_province="#",most_city="#";
         Integer valP=0,valC=0;
         int cnt=0;
+        System.out.println(photoList);
         for(Photo photo:photoList){
-            if(photo_url1.equals("#")){
-                photo_url1=photo.getImgUrl();
-            }
-            if(photo_url2.equals("#")){
-                photo_url2=photo.getImgUrl();
-            }
-            if(photo_url3.equals("#")){
-                photo_url3=photo.getImgUrl();
-            }
-            if(photo_url4.equals("#")){
-                photo_url5=photo.getImgUrl();
-            }
-            if(photo_url6.equals("#")){
-                photo_url6=photo.getImgUrl();
-            }
-            Long t;
-            if(photo.getPhotoTime()!=null){
-                t=photo.getPhotoTime();
-            }else{
-                t=photo.getTime();
-            }
             // todo: 照片时间筛选
-            if(true){
                 cnt++;
                 Integer val=null;
                 if(photo.getCity()!=null) {
@@ -219,7 +198,9 @@ public class PhotoServiceImpl implements PhotoService {
                     val = vis_province.get(photo.getProvince());
                     if (val == null) {
                         if (valP == 0) {
-                            photo_url1=photo.getImgUrl();
+                            if(photo.getImgUrl()!=null) {
+                                photo_url1 = photo.getImgUrl();
+                            }
                             most_province = photo.getProvince();
                             valP = 1;
                         }
@@ -228,7 +209,9 @@ public class PhotoServiceImpl implements PhotoService {
                     } else {
                         vis_province.put(photo.getProvince(), val + 1);
                         if (valP < val + 1) {
-                            photo_url1=photo.getImgUrl();
+                            if(photo.getImgUrl()!=null){
+                                photo_url1=photo.getImgUrl();
+                            }
                             most_province = photo.getProvince();
                             valP = val + 1;
                         }
@@ -238,33 +221,42 @@ public class PhotoServiceImpl implements PhotoService {
                 Double ew=photo.getLongitude();
                 if (sn != null && ew != null){
                     if(sn<S){
-                        photo_url4=photo.getImgUrl();
+                        if(photo.getImgUrl()!=null){
+                            photo_url4=photo.getImgUrl();
+                        }
                         S=sn;
                         if(!photo.getProvince().equals("")) Pro[1]=photo.getProvince();
                         if(photo.getCity()!=null) Cit[1]=photo.getCity();
                     }
                     if(sn>N){
                         N=sn;
-                        photo_url6=photo.getImgUrl();
+                        if(photo.getImgUrl()!=null){
+                            photo_url6=photo.getImgUrl();
+                        }
                         if(!photo.getProvince().equals("")) Pro[3]=photo.getProvince();
                         if(photo.getCity()!=null)
                             Cit[3] = photo.getCity();
                     }
                     if(ew>E){
                         E=ew;
-                        photo_url3=photo.getImgUrl();
+                        if(photo.getImgUrl()!=null){
+                            photo_url3=photo.getImgUrl();
+                        }
                         if(!photo.getProvince().equals("")) Pro[0]=photo.getProvince();
                         if(photo.getCity()!=null) Cit[0]=photo.getCity();
                     }
                     if(ew<W){
                         W=ew;
-                        photo_url5=photo.getImgUrl();
+                        if(photo.getImgUrl()!=null){
+                            photo_url5=photo.getImgUrl();
+                        }
                         if(!photo.getProvince().equals("")) Pro[2]=photo.getProvince();
                         if(photo.getCity()!=null) Cit[2]=photo.getCity();
                     }
                 }
-            }
-            photo_url2=photo.getImgUrl();
+                if(photo.getImgUrl()!=null) {
+                    photo_url2 = photo.getImgUrl();
+                }
         }
         retString.add(vis_province.size()+"");
         retString.add(vis_city.size()+"");
