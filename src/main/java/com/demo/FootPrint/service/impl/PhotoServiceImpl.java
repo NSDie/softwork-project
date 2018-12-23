@@ -146,22 +146,10 @@ public class PhotoServiceImpl implements PhotoService {
         List<Photo> photoList = photoDao.getAllByUserId(userId);
         List<String> retString = new ArrayList<>();
         Double E=0.0,S=90.0,W=180.0,N=0.0;
-        String[] Pro={"#","#","#","#"};
-        String[] Cit={"#","#","#","#"};
-//        Collections.sort(photoList, new Comparator<Photo>() {//时间排序
-//            @Override
-//            public int compare(Photo o1, Photo o2) {
-//                int i;
-//                if(o1.getPhotoTime()!=null && o1.getPhotoTime()!=null)
-//                i=(int)(o1.getPhotoTime()-o2.getPhotoTime());
-//                else i=(int)(o1.getTime()-o2.getTime());
-//                return i;
-//            }
-//        });
+        String[] Pro={"无","无","无","无"};
+        String[] Cit={"无","无","无","无"};
         Map<String,Integer> vis_province = new HashMap<>();
         Map<String,Integer> vis_city = new HashMap<>();
-        //List<String> orderPro=new ArrayList<>();
-        //List<String> orderCit=new ArrayList<>();
         String photo_url1="https://foot.yyf-blog.com/userstory/bg/pic1.png";
         String photo_url2="https://foot.yyf-blog.com/userstory/bg/pic2.png";
         String photo_url3="https://foot.yyf-blog.com/userstory/bg/pic3.png";
@@ -171,6 +159,7 @@ public class PhotoServiceImpl implements PhotoService {
         String most_province="中国",most_city="家乡";
         Integer valP=0,valC=0;
         int cnt=0;
+        long time=0;
         System.out.println(photoList);
         for(Photo photo:photoList){
             // todo: 照片时间筛选
@@ -183,7 +172,6 @@ public class PhotoServiceImpl implements PhotoService {
                             most_city = photo.getCity();
                             valC = 1;
                         }
-                        //orderCit.add(photo.getCity());
                         vis_city.put(photo.getCity(), 1);
                     } else {
                         vis_city.put(photo.getCity(), val + 1);
@@ -204,7 +192,6 @@ public class PhotoServiceImpl implements PhotoService {
                             most_province = photo.getProvince();
                             valP = 1;
                         }
-                        //orderPro.add(photo.getProvince());
                         vis_province.put(photo.getProvince(), 1);
                     } else {
                         vis_province.put(photo.getProvince(), val + 1);
@@ -255,7 +242,19 @@ public class PhotoServiceImpl implements PhotoService {
                     }
                 }
                 if(photo.getImgUrl()!=null) {
-                    photo_url2 = photo.getImgUrl();
+                    if(photo.getPhotoTime()!=null){
+                        if(time<photo.getPhotoTime())
+                        {
+                            time=photo.getPhotoTime();
+                            photo_url2 = photo.getImgUrl();
+                        }
+                    }
+                    else if(photo.getTime()!=null){
+                        if(time<photo.getTime()){
+                            time=photo.getTime();
+                            photo_url2=photo.getImgUrl();
+                        }
+                    }
                 }
         }
         retString.add(vis_province.size()+"");
@@ -271,8 +270,6 @@ public class PhotoServiceImpl implements PhotoService {
         retString.add(photo_url6);//最北边的照片
         for(int i=0;i<4;++i) retString.add(Pro[i]);
         for(int i=0;i<4;++i) retString.add(Cit[i]);
-
-        //for(String cit:orderCit) retString.add(cit);
         return  retString;
     }
 }
