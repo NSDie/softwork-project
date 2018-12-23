@@ -130,11 +130,17 @@ public class UserServiceImpl implements UserService {
         HashSet<String> citySet = new HashSet<>();
         HashSet<String> proSet = new HashSet<>();
         for(Photo photo:photoList){
-            if(!(photo.getCity().equals("")||photo.getCity()==null)){
-                citySet.add(photo.getCity());
+            if(!(photo.getCity()==null)){
+                if(!(photo.getCity().equals(""))){
+                    citySet.add(photo.getCity());
+                }
+
             }
-            if(!(photo.getProvince().equals("")||photo.getProvince()==null)){
-                proSet.add(photo.getCity());
+            if(!(photo.getProvince()==null)){
+                if(!(photo.getProvince().equals(""))){
+                    proSet.add(photo.getProvince());
+                }
+
             }
         }
 
