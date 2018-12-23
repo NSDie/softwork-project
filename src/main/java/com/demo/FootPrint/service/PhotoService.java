@@ -73,7 +73,6 @@ public interface PhotoService {
      * 最南边的照片
      * 最西边的照片
      * 最北边的照片
-     * 8.这个段时间去过的城市顺序-有bug
      */
     List<String> cal_vised_place(Integer userId, Long start_time, Long end_time);
 }
