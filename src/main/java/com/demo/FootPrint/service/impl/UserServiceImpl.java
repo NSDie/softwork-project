@@ -1,11 +1,13 @@
 package com.demo.FootPrint.service.impl;
 
+import com.demo.FootPrint.dao.PhotoDao;
 import com.demo.FootPrint.dao.UserDao;
 import com.demo.FootPrint.exception.error.ApiException;
 import com.demo.FootPrint.exception.error.UserErrorEnum;
 import com.demo.FootPrint.model.dto.UserAdminLoginDTO;
 import com.demo.FootPrint.model.dto.UserOAuthDTO;
 import com.demo.FootPrint.model.po.Jscode2session;
+import com.demo.FootPrint.model.po.Photo;
 import com.demo.FootPrint.model.po.WechatUser;
 import com.demo.FootPrint.model.vo.UserVO;
 import com.demo.FootPrint.service.UserService;
@@ -19,6 +21,10 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 
 /**
  * @program: softwork-project
@@ -35,6 +41,8 @@ public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
+    private PhotoDao photoDao;
+
     // 数据库session-AES-密钥
     private static final String SESSION_PWD = "8X1V2EoXH79CZ3zS";
 
@@ -42,8 +50,9 @@ public class UserServiceImpl implements UserService {
     private RedisOperationsSessionRepository sessionRepository;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, RedisOperationsSessionRepository sessionRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserDao userDao, PhotoDao photoDao, RedisOperationsSessionRepository sessionRepository, ModelMapper modelMapper) {
         this.userDao = userDao;
+        this.photoDao = photoDao;
         this.sessionRepository = sessionRepository;
         this.modelMapper = modelMapper;
     }
@@ -115,8 +124,56 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO getMe(Integer userId) {
         WechatUser wechatUser = userDao.getInfo(userId);
+        UserVO userVO = modelMapper.map(wechatUser, UserVO.class);
+        List<Photo> photoList = photoDao.getAllByUserId(userId);
+        ArrayList<Integer> achieveList = new ArrayList<>();
+        HashSet<String> citySet = new HashSet<>();
+        HashSet<String> proSet = new HashSet<>();
+        for(Photo photo:photoList){
+            if(!(photo.getCity().equals("")||photo.getCity()==null)){
+                citySet.add(photo.getCity());
+            }
+            if(!(photo.getProvince().equals("")||photo.getProvince()==null)){
+                proSet.add(photo.getCity());
+            }
+        }
 
-        return modelMapper.map(wechatUser, UserVO.class);
+        // 成就1 去过两个省份
+        if(proSet.size()>=2){
+            achieveList.add(1);
+        }else{
+            achieveList.add(0);
+        }
+        // 成就2 十个朋友识别你的二维码进入
+        achieveList.add(0);
+        // 成就3 去过一个省份内超过五个城市
+        if(citySet.size()>=5){
+            achieveList.add(1);
+        }else{
+            achieveList.add(0);
+        }
+        // 成就4 去过5个省份
+        if(proSet.size()>=5){
+            achieveList.add(1);
+        }else{
+            achieveList.add(0);
+        }
+        // 成就5 去过10个省份
+        if(proSet.size()>=10){
+            achieveList.add(1);
+        }else{
+            achieveList.add(0);
+        }
+        // 成就6 去过30个城市或15个省份
+        if(proSet.size()>=15||citySet.size()>=30){
+            achieveList.add(1);
+        }else{
+            achieveList.add(0);
+        }
+        userVO.setAchievement(achieveList);
+        userVO.setCityNum(citySet.size());
+        userVO.setProNum(proSet.size());
+        return userVO;
     }
 
 

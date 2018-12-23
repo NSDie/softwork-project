@@ -100,9 +100,9 @@ public class PhotoController {
         endTime = new Long(999999999);
         System.out.println(startTime);
         System.out.println(endTime);
-        List<String> res = photoService.cal_vised_place(6, startTime, endTime);
+        //List<String> res = photoService.cal_vised_place(6, startTime, endTime);
 
-        //List<String> res = photoService.cal_vised_place((Integer) session.getAttribute("userId"), startTime, endTime);
+        List<String> res = photoService.cal_vised_place((Integer) session.getAttribute("userId"), startTime, endTime);
         System.out.println(res);
         apiResult.setData(res);
         return apiResult;

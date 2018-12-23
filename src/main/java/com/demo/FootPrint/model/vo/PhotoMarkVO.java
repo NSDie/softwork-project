@@ -16,6 +16,12 @@ public class PhotoMarkVO {
 
     private String province;
 
+    private Double longitude;
+
+    private Double latitude;
+
+    private String city;
+
     private Integer num;
 
 }
