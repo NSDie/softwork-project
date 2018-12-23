@@ -170,6 +170,9 @@ public class PhotoServiceImpl implements PhotoService {
                     if (val == null) {
                         if (valC == 0) {
                             most_city = photo.getCity();
+                            if(photo.getImgUrl()!=null) {
+                                photo_url1 = photo.getImgUrl();
+                            }
                             valC = 1;
                         }
                         vis_city.put(photo.getCity(), 1);
@@ -178,6 +181,9 @@ public class PhotoServiceImpl implements PhotoService {
                         if (valC < val + 1) {
                             most_city = photo.getCity();
                             valC = val + 1;
+                            if(photo.getImgUrl()!=null){
+                                photo_url1=photo.getImgUrl();
+                            }
                         }
                     }
                 }
@@ -186,9 +192,6 @@ public class PhotoServiceImpl implements PhotoService {
                     val = vis_province.get(photo.getProvince());
                     if (val == null) {
                         if (valP == 0) {
-                            if(photo.getImgUrl()!=null) {
-                                photo_url1 = photo.getImgUrl();
-                            }
                             most_province = photo.getProvince();
                             valP = 1;
                         }
@@ -196,9 +199,6 @@ public class PhotoServiceImpl implements PhotoService {
                     } else {
                         vis_province.put(photo.getProvince(), val + 1);
                         if (valP < val + 1) {
-                            if(photo.getImgUrl()!=null){
-                                photo_url1=photo.getImgUrl();
-                            }
                             most_province = photo.getProvince();
                             valP = val + 1;
                         }
@@ -257,17 +257,17 @@ public class PhotoServiceImpl implements PhotoService {
                     }
                 }
         }
-        retString.add(vis_province.size()+"");
-        retString.add(vis_city.size()+"");
-        retString.add(cnt+"");
-        retString.add(most_province);
-        retString.add(most_city);
-        retString.add(photo_url1);//最经常去的省份中其中一张照片
-        retString.add(photo_url2);//最新一次的照片
-        retString.add(photo_url3);//最东方的照片
-        retString.add(photo_url4);//最南边的照片
-        retString.add(photo_url5);//最西边的照片
-        retString.add(photo_url6);//最北边的照片
+        retString.add(vis_province.size()+"");//0
+        retString.add(vis_city.size()+"");//1
+        retString.add(cnt+"");//2
+        retString.add(most_province);//3
+        retString.add(most_city);//4
+        retString.add(photo_url1);// 5 最经常去的省份中其中一张照片
+        retString.add(photo_url2);// 6 最新一次的照片
+        retString.add(photo_url3);// 7 最东方的照片
+        retString.add(photo_url4);// 8 最南边的照片
+        retString.add(photo_url5);// 9 最西边的照片
+        retString.add(photo_url6);// 10 最北边的照片
         for(int i=0;i<4;++i) retString.add(Pro[i]);
         for(int i=0;i<4;++i) retString.add(Cit[i]);
         return  retString;
